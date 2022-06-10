@@ -9,4 +9,4 @@ Project for Code Academy
 
 Utilising a caesar cypher to encrypt and decrypt files given by the user.
 
-It has the option of using brute force and a statisical crack
+It has the option of using brute force and a statistical crack
