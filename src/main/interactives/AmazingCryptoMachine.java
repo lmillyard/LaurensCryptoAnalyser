@@ -10,44 +10,55 @@ public class AmazingCryptoMachine extends Menu{
     private String language;
 
 
+    public void start() {
+
+        while(true) {
+
+            if (timesRoundCounter == 0) {
+                welcomeMessage();
+                timesRoundCounter++;
+            }else {
+                welcomeBackMessage();
+            }
+
+            // Option 1 = encrypt, Option 2 = decrypt, Option 0 = exit.
+            int option = pickAnOption();
+
+            if (option == 0) {
+                goodbyeMessage();
+                break;
+            } else if (option == 1) {
+                encrypt();
+            } else if (option == 2) {
+                decrypt();
+            }
+        }
+    }
+
     private void welcomeMessage() {
         System.out.println("""
                 \t~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 Welcome to the amazing crypto machine!
                 \t~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
     }
+
     private void welcomeBackMessage(){
         System.out.println("\t\tWelcome back!");
     }
+
     private void goodbyeMessage() {
         System.out.println("\tThank you and goodbye!");
     }
 
-    public void start() {
+    private void encrypt() {
+        contents = pickAFile();
+        int offset = pickAnOffset();
+        encrypt(contents, offset);
+    }
 
-        if (timesRoundCounter == 0) {
-            welcomeMessage();
-            timesRoundCounter++;
-        }else {
-            welcomeBackMessage();
-        }
-
-            int option = pickAnOption();
-            // Option 1 = encrypt, Option 2 = decrypt, Option 0 = exit.
-            switch (option) {
-                case 0:
-                    goodbyeMessage();
-                    break;
-                case 1:
-                    contents = pickAFile();
-                    int offset = pickAnOffset();
-                    encrypt(contents, offset);
-                    start();
-                case 2:
-                    contents = pickAFile();
-                    language = pickALanguage();
-                    decrypt(contents, language);
-                    start();
-            }
+    private void decrypt() {
+        contents = pickAFile();
+        language = pickALanguage();
+        decrypt(contents, language);
     }
 }
